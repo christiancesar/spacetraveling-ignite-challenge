@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import logo from '../../../public/images/logo.svg';
+// import logo from '../../../public/images/logo.svg';
 
 export function Header() {
   return (
     <header>
       <div>
-        <img src={logo} alt="spacetraveling" />;
+        <h1> Logo</h1>
       </div>
     </header>
   );

@@ -1,11 +1,12 @@
 import { GetStaticProps } from 'next';
 
-import { Head } from 'next/document';
+import Head from 'next/head';
 
-// import { getPrismicClient } from '../services/prismic';
+import Prismic from '@prismicio/client';
+import { getPrismicClient } from '../services/prismic';
 
-// import commonStyles from '../styles/common.module.scss';
-// import styles from './home.module.scss';
+import commonStyles from '../styles/common.module.scss';
+import styles from './home.module.scss';
 
 interface Post {
   uid?: string;
@@ -38,9 +39,16 @@ export default function Home() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const prismic = getPrismicClient();
-  // const postsResponse = await prismic.query(TODO);
-  // TODO
+  const prismic = getPrismicClient();
+  const response = await prismic.query(
+    Prismic.Predicates.at('document.type', 'post'),
+    {
+      fetch: ['post.title', 'post.content'],
+      pageSize: 100,
+    }
+  );
+  console.log(response);
+
   return {
     props: {},
   };
